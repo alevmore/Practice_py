@@ -1,20 +1,28 @@
+import sys
 from pathlib import Path
+import colorama
+colorama.init(autoreset=True)
 
-from colorama import Fore, Back, Style
+path=sys.argv[1]
+def path_to_directory(path): 
+   
+    directory = Path(path)
 
-directory = Path('./picture')
-if directory.exists():
-    if directory.is_dir():
-        print (Fore.GREEN + 'the main folder is: ./picture')
-        for path in directory.iterdir():
-            if path.is_dir():
-                print (Fore.GREEN + 'the subfolder inside the main folder is: ./logo')
-                for fol in path.iterdir():
-                    print (Fore.RED + f'{fol}')
-            else:
-                    print (Fore.BLUE + f'{path}')
-else:
-    print (Style.RESET_ALL + f'The folder {directory} is not found')
+    if directory.exists():
+        if directory.is_dir():
+            print (colorama.Fore.GREEN + 'the main folder is: {directory.name}')
+            for folder in directory.iterdir():
+                if folder.is_dir():
+                    print (colorama.Fore.GREEN + 'the subfolder inside the main folder is: {folder.name}')
+                    for fol in folder.iterdir():
+                        print (colorama.Fore.RED + f'{fol.name}')
+                else:
+                    print (colorama.Fore.BLUE + f'{folder.name}')
+    else:
+        print (colorama.Style.RESET_ALL + f'The folder {directory.name} is not found')
+
+        return path
+path_to_directory(path=path)  
 
 
    
